@@ -13,6 +13,7 @@
 const isFunction = require('lodash/lang/isFunction');
 const isString = require('lodash/lang/isString');
 const assign = require('lodash/object/assign');
+const merge = require('lodash/object/merge');
 const partial = require('lodash/function/partial');
 const nunjucks = require('nunjucks');
 
@@ -54,7 +55,7 @@ module.exports = function (templatesPath, nunjucksOptions, extConfig, callback) 
         this.render = partial(function (environment, extConfig, name, context) {
             return new Promise(partial(function (koaContext, resolve, reject) {
                 if(isString(name) && name.length > 0) {
-                    environment.render(isString(extConfig.suffix) && extConfig.suffix.length > 0 ? name + extConfig.suffix : name, context, partial(function (extConfig, error, result) {
+                    environment.render(isString(extConfig.suffix) && extConfig.suffix.length > 0 ? name + extConfig.suffix : name, merge({}, koaContext.state, context), partial(function (extConfig, error, result) {
                         if(error) {
                             reject(error);
                         } else {
