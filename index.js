@@ -31,10 +31,10 @@ const defaultConfig = {
 
 /**
  * Create koa middleware for Nunjucks
- * @param {String} templatesPath
+ * @param {String} [templatesPath] Where is the templates
  * @param {Object} [nunjucksOptions] the options of nunjucks
  * @param {{suffix: String, contentType: String, renderToResponseBody: Boolean}} [extConfig] Extended config of this middleware
- * @param {Function} [callback] The environment will pass to the callback function
+ * @param {Function} [callback] The environment will pass to the callback function, it can be used to add filters and so on.
  * @returns {Generator}
  */
 module.exports = function (templatesPath, nunjucksOptions, extConfig, callback) {
