@@ -1,6 +1,6 @@
-koa-nunjucks2
+koa-nunjucks2    [![License][license-img]][license-url]
 ===============
-  [![License][license-img]][license-url]
+  [![NPM](https://nodei.co/npm/koa-nunjucks2.png?compact=true)](https://nodei.co/npm/koa-nunjucks2/)
 
   koa middleware for Nunjucks.
 
