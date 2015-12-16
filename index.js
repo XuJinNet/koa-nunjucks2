@@ -62,8 +62,10 @@ module.exports = function (templatesPath, nunjucksOptions, extConfig, callback) 
                             if(extConfig.renderToResponseBody === true) {
                                 koaContext.type = extConfig.contentType;
                                 koaContext.body = result;
+                                resolve();
+                            } else {
+                                resolve(result);
                             }
-                            resolve(result);
                         }
                     }, extConfig));
                 } else {

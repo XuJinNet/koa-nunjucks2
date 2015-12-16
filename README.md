@@ -36,7 +36,7 @@ The render function is attached to the Koa context. It is availiable in other mi
 ```js
 yield this.render('home', { username: 'Whatever name' });
 ```
-The render function takes two arguments as defined by [nunjucks.render](http://mozilla.github.io/nunjucks/api.html#render). It does NOT take a callback, but return a promise.
+The render function takes two arguments as defined by [nunjucks.render](http://mozilla.github.io/nunjucks/api.html#render). It does NOT take a callback, but return a promise. If "renderToResponseBody" set false, the render result will return by promise.
 
 If you want to make a variable available in all templates, use [koa ctx.state](https://github.com/koajs/koa/blob/master/docs/api/context.md#ctxstate).
 
