@@ -1,7 +1,7 @@
 {
   "name": "koa-nunjucks2",
-  "version": "1.0.2",
-  "description": "koa middleware for Nunjucks",
+  "version": "2.0.0",
+  "description": "koa2 middleware for Nunjucks",
   "main": "index.js",
   "scripts": {},
   "repository": {
@@ -10,6 +10,7 @@
   },
   "keywords": [
     "koa",
+    "koa2",
     "middleware",
     "nunjucks"
   ],
@@ -19,7 +20,7 @@
     "node": ">=0.12.0"
   },
   "dependencies": {
-    "lodash": "^3.10.1",
-    "nunjucks": "^2.2.0"
+    "lodash": "^4.12.0",
+    "nunjucks": "^2.4.2"
   }
 }

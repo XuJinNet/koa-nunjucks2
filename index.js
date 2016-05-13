@@ -4,7 +4,7 @@
  */
 
 /**
- * koa middleware for Nunjucks
+ * koa2 middleware for Nunjucks
  * @module koa-nunjucks2
  */
 
@@ -35,7 +35,7 @@ const defaultConfig = {
  * @param {Object} [nunjucksOptions] the options of nunjucks
  * @param {{suffix: String, contentType: String, renderToResponseBody: Boolean}} [extConfig] Extended config of this middleware
  * @param {Function} [callback] The environment will pass to the callback function, it can be used to add filters and so on.
- * @returns {Generator}
+ * @returns {Function}
  */
 module.exports = function (templatesPath, nunjucksOptions, extConfig, callback) {
     let environment = nunjucks.configure(templatesPath, nunjucksOptions);
@@ -45,14 +45,14 @@ module.exports = function (templatesPath, nunjucksOptions, extConfig, callback) 
 
     extConfig = assign({}, defaultConfig, extConfig);
 
-    return function* (next) {
+    return async function (ctx, next) {
         /**
          * Render the template
          * @param name Template name
          * @param context Hash object
          * @return {Promise}
          */
-        this.render = partial(function (environment, extConfig, name, context) {
+        ctx.render = partial(function (environment, extConfig, name, context) {
             return new Promise(partial(function (koaContext, resolve, reject) {
                 if(isString(name) && name.length > 0) {
                     environment.render(isString(extConfig.suffix) && extConfig.suffix.length > 0 ? name + extConfig.suffix : name, merge({}, koaContext.state, context), partial(function (extConfig, error, result) {
@@ -74,6 +74,6 @@ module.exports = function (templatesPath, nunjucksOptions, extConfig, callback) 
             }, this));
         }, environment, extConfig);
 
-        yield next;
+        await next();
     }
 };
