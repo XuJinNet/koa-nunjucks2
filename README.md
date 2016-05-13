@@ -2,7 +2,7 @@ koa-nunjucks2    [![License][license-img]][license-url]
 ===============
   [![NPM](https://nodei.co/npm/koa-nunjucks2.png?compact=true)](https://nodei.co/npm/koa-nunjucks2/)
 
-  koa middleware for Nunjucks.
+  koa2 middleware for Nunjucks.
 
 ## Installation
 ```
@@ -10,7 +10,7 @@ $ npm install koa-nunjucks2 --save
 ```
 
 ## Middleware Setup
-First, require koa-nunjucks2. It returns a function that will return a middleware generator.
+First, require koa-nunjucks2. It returns a function that will return a middleware async function.
 
 ```js
 let koaNunjucks2 = require('koa-nunjucks2');
@@ -26,15 +26,16 @@ The function takes four arguments:
 Next, "use" the middleware function (before any other middleware that attempts to use it).
 
 ```js
-var app = require('koa')();
+const Koa = require('koa');
+const app = new Koa();
 app.use(koaNunjucks2Middleware);
 ```
 
 ## Usage
-The render function is attached to the Koa context. It is availiable in other middleware functions directly as "this". The function renders the view and automatically sets it as the response body if "renderToResponseBody" set true.
+The render function is attached to the Koa context. The function renders the view and automatically sets it as the response body if "renderToResponseBody" set true.
 
 ```js
-yield this.render('home', { username: 'Whatever name' });
+await ctx.render('home', { username: 'Whatever name' });
 ```
 The render function takes two arguments as defined by [nunjucks.render](http://mozilla.github.io/nunjucks/api.html#render). It does NOT take a callback, but return a promise. If "renderToResponseBody" set false, the render result will return by promise.
 
