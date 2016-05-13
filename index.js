@@ -10,11 +10,11 @@
 
 'use strict';
 
-const isFunction = require('lodash/lang/isFunction');
-const isString = require('lodash/lang/isString');
-const assign = require('lodash/object/assign');
-const merge = require('lodash/object/merge');
-const partial = require('lodash/function/partial');
+const isFunction = require('lodash/isFunction');
+const isString = require('lodash/isString');
+const assign = require('lodash/assign');
+const merge = require('lodash/merge');
+const partial = require('lodash/partial');
 const nunjucks = require('nunjucks');
 
 const defaultConfig = {
@@ -45,7 +45,7 @@ module.exports = function (templatesPath, nunjucksOptions, extConfig, callback) 
 
     extConfig = assign({}, defaultConfig, extConfig);
 
-    return async function (ctx, next) {
+    return function (ctx, next) {
         /**
          * Render the template
          * @param name Template name
@@ -74,6 +74,6 @@ module.exports = function (templatesPath, nunjucksOptions, extConfig, callback) 
             }, this));
         }, environment, extConfig);
 
-        await next();
+        return next();
     }
 };
